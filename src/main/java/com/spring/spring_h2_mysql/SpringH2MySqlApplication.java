@@ -1,5 +1,4 @@
 package com.spring.spring_h2_mysql;
-
 import com.spring.spring_h2_mysql.entities.Patient;
 import com.spring.spring_h2_mysql.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,6 @@ public class SpringH2MySqlApplication implements CommandLineRunner {
             );
         }
 
-
 		/* Affichage par list
 		List<Patient> patients = patientRepository.findAll();
 		patients.forEach(patient -> {
@@ -43,9 +41,7 @@ public class SpringH2MySqlApplication implements CommandLineRunner {
 			System.out.println(patient.getScore());
 			System.out.println(patient.getDateNaissance());
 			System.out.println(patient.isMalade());
-		});
-		 */
-
+		});*/
         //Affiche avec Pagination
         Page<Patient> patients = patientRepository.findAll(PageRequest.of(0,5));
         System.out.println("Total pages : "+patients.getTotalPages());
@@ -61,13 +57,12 @@ public class SpringH2MySqlApplication implements CommandLineRunner {
             System.out.println(patient.isMalade());
         });
 
+
         //System.out.println("******************Liste des patients malade:******************");
         //List<Patient> patientsList = patientRepository.findByMalade(true);
-
         //System.out.println("******************Liste de 4 patients malade dans la page 0:******************");
         //Page<Patient> patientsList = patientRepository.findByMalade(true,PageRequest.of(0,4));
-
-        System.out.println("******************Liste des patients qui contient dans le nom 'o' et un score < 100:******************");
+        System.out.println("***************Liste des patients qui contient dans le nom 'o' et un score < 100:**************");
         List<Patient> patientsList=patientRepository.chercherPatients("%o%",100);
         patientsList.forEach(patient -> {
             System.out.println("*******************Patient:"+patient.getId()+"*******************");
@@ -77,7 +72,7 @@ public class SpringH2MySqlApplication implements CommandLineRunner {
             System.out.println(patient.isMalade());
         });
 
-        //Recherche par Id
+        //Recherche de patient par Id
         System.out.println("******************** Recherche de patient par Id : ****************");
         Patient patient_recherche=patientRepository.findById(1L).orElse(null);
         if(patient_recherche!=null){
